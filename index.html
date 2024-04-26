@@ -9,13 +9,13 @@
 import OpenSCAD from "./openscad.js";
 // OPTIONAL: add fonts to the FS
 import { addFonts } from "./openscad.fonts.js";
-// OPTIONAL: add MCAD liibrary to the FS
+// OPTIONAL: add MCAD library to the FS
 import { addMCAD } from "./openscad.mcad.js";
 
 let filename = "tetrahedron.stl";
 const instance = await OpenSCAD({noInitialRun: true});
 instance.FS.writeFile("/input.scad", `cylinder(d1=10,d2=0,h=10,$fn=1);`);
-instance.callMain(["/input.scad", "-o", filename]);
+instance.callMain(["/input.scad", "--enable=manifold", "-o", filename]);
 const output = instance.FS.readFile("/"+filename);
 
 const link = document.createElement("a");
